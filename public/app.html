@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meditation | Mindful Moments</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+    🌙
+  </button>
+<body class="app-page">
+  <div class="app-container">
+    <header class="app-header">
+      <h1>Mindful Moments</h1>
+      <button id="logout-btn" class="btn btn-small">Logout</button>
+    </header>
+    
+    <main class="meditation-content">
+      <div class="welcome-message">
+        <h2>Welcome, <span id="username-display">User</span></h2>
+        <p>Choose your meditation duration</p>
+      </div>
+      
+      <div class="duration-selection">
+        <button class="duration-btn" data-duration="7">7 minutes</button>
+        <button class="duration-btn" data-duration="15">15 minutes</button>
+        <button class="duration-btn" data-duration="21">21 minutes</button>
+      </div>
+      
+      <div class="meditation-timer hidden">
+        <div class="timer-circle">
+          <div class="timer-display">00:00</div>
+        </div>
+        <div class="timer-controls">
+          <button id="start-btn" class="btn btn-primary">Start</button>
+          <button id="pause-btn" class="btn btn-secondary hidden">Pause</button>
+          <button id="resume-btn" class="btn btn-secondary hidden">Resume</button>
+          <button id="stop-btn" class="btn btn-tertiary hidden">End Session</button>
+        </div>
+      </div>
+      
+      <div class="meditation-complete hidden">
+        <h2>Session Complete</h2>
+        <p>Great job! Your meditation session has been saved.</p>
+        <button id="new-session-btn" class="btn btn-primary">New Session</button>
+      </div>
+      
+      <div class="history-section">
+        <h3>Your Meditation History</h3>
+        <div id="meditation-history" class="history-container">
+          <!-- History items will be populated here -->
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script src="js/app.js"></script>
+  <script src="js/theme.js"></script>
+</body>
+</html>

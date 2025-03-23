@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindful Moments | Meditation App</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+    🌙
+  </button>
+<body class="landing-page">
+  <div class="container">
+    <header>
+      <h1>Mindful Moments</h1>
+      <p>Find your peace, one breath at a time</p>
+    </header>
+    
+    <div class="cta-buttons">
+      <a href="/login" class="btn btn-primary">Login</a>
+      <a href="/signup" class="btn btn-secondary">Sign Up</a>
+    </div>
+    
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🕰️</div>
+        <h3>Timed Sessions</h3>
+        <p>Choose from 7, 15, or 21 minute guided meditations</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <h3>Track Progress</h3>
+        <p>Monitor your meditation journey over time</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎵</div>
+        <h3>Soothing Sounds</h3>
+        <p>Gentle ambient sounds to enhance your practice</p>
+      </div>
+    </div>
+  </div>
+</body>
+</div>
+<script>
+  // Check if user is already logged in
+  async function checkAuth() {
+    try {
+      const response = await fetch('/api/meditation/history', {
+        credentials: 'include' // Important for sending cookies
+      });
+      
+      if (response.ok) {
+        // User is authenticated, redirect to app
+        window.location.href = '/app';
+      }
+    } catch (error) {
+      // Not logged in, stay on landing page
+      console.log('User not logged in');
+    }
+  }
+  
+  // Run auth check when page loads
+  checkAuth();
+</script>
+<script src="js/theme.js"></script>
+</body>
+</html>
