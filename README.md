@@ -35,8 +35,8 @@ Backend Features
 
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/zen-meditation-app.git
-   cd zen-meditation-app
+   git clone https://github.com/yourusername/Meditation-web-app.git
+   
    ```
 
 2. Install dependencies
