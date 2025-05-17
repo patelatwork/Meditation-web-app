@@ -71,6 +71,7 @@ meditation-app/
 │   ├── css/                 # Stylesheets
 │   ├── js/                  # Client-side JavaScript
 │   └── sounds/              # Meditation sounds
+│   └── html files  
 ├── server.js                # Main application file
 ├── package.json             # Project dependencies
 └── README.md                # Project documentation
