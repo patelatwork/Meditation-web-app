@@ -71,11 +71,6 @@ meditation-app/
 │   ├── css/                 # Stylesheets
 │   ├── js/                  # Client-side JavaScript
 │   └── sounds/              # Meditation sounds
-├── views/                   # Frontend templates
-├── models/                  # Database models
-├── routes/                  # API routes
-├── middleware/              # Custom middleware
-├── controllers/             # Request handlers
 ├── server.js                # Main application file
 ├── package.json             # Project dependencies
 └── README.md                # Project documentation
