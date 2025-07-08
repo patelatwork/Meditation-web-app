@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -69,34 +70,58 @@ const authenticate = async (req, res, next) => {
 
 // Routes
 app.post('/api/signup', async (req, res) => {
-    try {
-      const { username, email, password } = req.body;
-      
-      // Check if user already exists
-      const existingUser = await User.findOne({ $or: [{ email }, { username }] });
-      if (existingUser) {
-        return res.status(400).json({ message: 'User already exists' });
-      }
-      
-      // Hash password
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-      
-      // Create new user
-      const user = new User({
-        username,
-        email,
-        password: hashedPassword
-      });
-      
-      await user.save();
-      
-      // Return success without setting token
-      res.status(201).json({ message: 'Signup successful. Please login.' });
-    } catch (error) {
-      res.status(500).json({ message: 'Server error', error: error.message });
+  try {
+    const { username, email, password } = req.body;
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
     }
-  });
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create new user
+    const user = new User({
+      username,
+      email,
+      password: hashedPassword
+    });
+
+    await user.save();
+
+    // Send welcome email
+    const transporter = nodemailer.createTransport({
+      service: 'gmail', // or your email provider
+      auth: {
+        user: 'dhruvsp2705@gmail.com',      // replace with your email
+        pass: 'YOG@eshwar1'         // use an App Password if using Gmail
+      }
+    });
+
+    const mailOptions = {
+      from: '"Meditation App" <dhruvsp2705@gmail.com@gmail.com>',
+      to: email,
+      subject: 'Welcome to Meditation App!',
+      text: `Hi ${username},\n\nWelcome to Meditation App! We're glad to have you on your mindfulness journey.\n\nEnjoy your meditations!\n\nBest,\nThe Mindful Team`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Email send error:', error);
+        // Don't fail signup if email fails, just log it
+      } else {
+        console.log('Welcome email sent:', info.response);
+      }
+    });
+
+    res.status(201).json({ message: 'Signup successful. Please login.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
   app.post('/api/login', async (req, res) => {
     try {

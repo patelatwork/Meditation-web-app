@@ -307,16 +307,35 @@ newSessionBtn.addEventListener('click', () => {
     
     // Reset timer UI
     const resetTimerUI = () => {
+      // Stop any running timer
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isPaused = false;
+      timeLeft = 0;
+      selectedDuration = 0;
+    
+      // Stop and reset audio
+      if (meditationAudio) {
+        meditationAudio.pause();
+        meditationAudio.currentTime = 0;
+      }
+      if (guidedAudio) {
+        guidedAudio.pause();
+        guidedAudio.currentTime = 0;
+      }
+    
       meditationTimer.classList.add('hidden');
       meditationComplete.classList.add('hidden');
       durationSelection.classList.remove('hidden');
-      
+    
       // Reset active state on duration buttons
       durationBtns.forEach(btn => {
         btn.classList.remove('active');
       });
-      
-      selectedDuration = 0;
+    
+      // Reset timer display and animation
+      timerDisplay.textContent = formatTime(0);
+      timerCircle.style.background = 'conic-gradient(var(--primary-color) 0%, var(--secondary-color) 0%)';
     };
     
     // Record meditation session to backend
